@@ -11,6 +11,7 @@
             game.load.image('cat', 'img/cat.png');
             game.load.image('brush', 'img/brush.png');
             game.load.image('dog2', 'img/dog3.png');
+            game.load.image('end', 'img/end.png');
 
 
         },
@@ -21,11 +22,15 @@
             this.dog.scale.setTo(0.2);
             this.girl.scale.setTo(0.3);
             var spacing = 80;
-            this.food = game.add.sprite(100, 420, 'food');
-            this.toy = game.add.sprite(this.food.right + spacing, 420, 'toy');
-            this.brush = game.add.sprite(this.toy.right + spacing, 420, 'brush');
-            this.dog2 = game.add.sprite(this.brush.right + spacing, 420, 'dog2');
+            var buttonHeight = 480;
+            this.food = game.add.sprite(100, buttonHeight, 'food');
+            this.toy = game.add.sprite(this.food.right + spacing, buttonHeight, 'toy');
+            this.brush = game.add.sprite(this.toy.right + spacing, buttonHeight, 'brush');
+            this.dog2 = game.add.sprite(this.brush.right + spacing, buttonHeight, 'dog2');
 
+            this.dog.healthInfo = {
+                'health': 500
+            }
             this.cursors = game.input.keyboard.createCursorKeys();
 
         },
@@ -47,6 +52,13 @@
             if (this.cursors.down.isDown)
             {
                 this.girl.y += 1;
+            }
+            this.dog.healthInfo.health -= 1;
+            console.log(this.dog.healthInfo.health)
+            if (this.dog.healthInfo.health <= 0)
+            {
+                console.log('dog is dead');
+                game.add.sprite(0,0, 'end');
             }
 
         }
