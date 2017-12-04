@@ -1,0 +1,57 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/phaser/2.6.2/phaser.js"></script>
+<script>
+    var game = new Phaser.Game(800, 600);
+    var GameState = {
+        preload: function(){
+            game.load.image('girl', 'img/girl.png');
+            game.load.image('city', 'img/city.jpg');
+            game.load.image('dog', 'img/dog.png');
+            game.load.image('food', 'img/food.png');
+            game.load.image('toy', 'img/toy.png');
+            game.load.image('cat', 'img/cat.png');
+            game.load.image('brush', 'img/brush.png');
+            game.load.image('dog2', 'img/dog3.png');
+
+
+        },
+        create: function(){
+            this.city = game.add.sprite(0,0, 'city');
+            this.girl = game.add.sprite(0, 200, 'girl');
+            this.dog = game.add.sprite(442, 224, 'dog')
+            this.dog.scale.setTo(0.2);
+            this.girl.scale.setTo(0.3);
+            var spacing = 80;
+            this.food = game.add.sprite(100, 420, 'food');
+            this.toy = game.add.sprite(this.food.right + spacing, 420, 'toy');
+            this.brush = game.add.sprite(this.toy.right + spacing, 420, 'brush');
+            this.dog2 = game.add.sprite(this.brush.right + spacing, 420, 'dog2');
+
+            this.cursors = game.input.keyboard.createCursorKeys();
+
+        },
+        update: function(){
+            if (this.cursors.right.isDown)
+            {  
+                this.girl.x += 1;}
+            
+            if (this.cursors.left.isDown)
+            {
+                this.girl.x -= 1;
+            }
+
+            if (this.cursors.up.isDown)
+            {
+                this.girl.y -= 1;
+            }
+
+            if (this.cursors.down.isDown)
+            {
+                this.girl.y += 1;
+            }
+
+        }
+    }
+    game.state.add('GameState', GameState);
+    game.state.start('GameState');
+
+</script>
